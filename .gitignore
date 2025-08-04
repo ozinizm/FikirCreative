@@ -1,0 +1,6 @@
+.DS_Store
+.vscode/
+.Trash/
+Library/
+node_modules/
+npm-debug.log
