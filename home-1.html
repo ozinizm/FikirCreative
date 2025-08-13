@@ -888,6 +888,39 @@
     <script src="js/plugins/ScrollTo.min.js"></script>
     <!-- ashley js -->
     <script src="js/main.js"></script>
+<script id="touchpad-scroll-fix">
+(function(){
+  // 0) Güvenlik: olası overlay/cursor katmanları jestleri bloklamasın
+  var css = document.createElement('style');
+  css.textContent = 'html,body{overflow-y:auto!important} .mil-ball,.mil-cursor,.cursor,.overlay,.preloader{pointer-events:none!important}';
+  document.head.appendChild(css);
+
+  // En yakın dikey kaydırılabilir elemanı bul
+  function findScrollable(el){
+    while (el && el !== document.body){
+      var cs = getComputedStyle(el);
+      if ((/auto|scroll/).test(cs.overflowY) && el.scrollHeight > el.clientHeight) return el;
+      el = el.parentElement;
+    }
+    return document.scrollingElement || document.documentElement;
+  }
+
+  // Touchpad "wheel" hareketi başka kodlarca engellense bile biz kaydıralım
+  function forceScroll(e){
+    var dy = e.deltaY || e.wheelDeltaY || e.wheelDelta || 0;
+    var target = findScrollable(e.target);
+    target.scrollTop += dy;
+    e.stopImmediatePropagation();
+    e.preventDefault();
+  }
+
+  // Yakalama fazında dinle: önce biz çalışalım
+  ['wheel','mousewheel','DOMMouseScroll'].forEach(function(ev){
+    window.addEventListener(ev, forceScroll, {capture:true, passive:false});
+    document.addEventListener(ev, forceScroll, {capture:true, passive:false});
+  });
+})();
+</script>
 
 </body>
 
