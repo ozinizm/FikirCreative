@@ -706,10 +706,17 @@
 
                                     <p class="mil-light-soft mil-up mil-mb-30">Bültenimize abone olun:</p>
 
-                                    <form class="mil-subscribe-form mil-up">
-                                        <input type="text" placeholder="E-posta adresinizi girin">
-                                        <button type="submit" class="mil-button mil-icon-button-sm mil-arrow-place"></button>
-                                    </form>
+                                  <form action="https://api.web3forms.com/submit" method="POST" class="mil-subscribe-form mil-up" id="subscribeForm">
+  <input type="hidden" name="access_key" value="BURAYA_ACCESS_KEY">
+  <input type="hidden" name="from_name" value="Fikir Creative">
+  <input type="hidden" name="subject" value="Yeni bülten aboneliği">
+  <!-- İstersen başarı sonrası yönlendirme -->
+  <!-- <input type="hidden" name="redirect" value="https://siteniz.com/tesekkurler.html"> -->
+
+  <input type="email" name="email" placeholder="E-posta adresinizi girin" required>
+  <button type="submit" class="mil-button mil-icon-button-sm mil-arrow-place"></button>
+</form>
+
 
                                 </div>
                                 <div class="col-md-7 col-lg-6">
