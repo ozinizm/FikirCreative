@@ -707,13 +707,20 @@
                                     <p class="mil-light-soft mil-up mil-mb-30">Bültenimize abone olun:</p>
 
                                   <form class="mil-subscribe-form mil-up"
-      onsubmit="window.location.href='mailto:info@fikircreative.com'
-        + '?subject=' + encodeURIComponent('Bülten aboneliği')
-        + '&body=' + encodeURIComponent('E-posta: ' + this.elements['email'].value);
-        return false;">
-  <input type="email" name="email" placeholder="E-posta adresinizi girin" required>
-  <button type="submit" class="mil-button mil-icon-button-sm mil-arrow-place"></button>
+      onsubmit="(function(f){
+        var mail = f.email.value.trim();
+        var subj = 'Bülten aboneliği';
+        var body = 'E-posta: ' + mail + '\nKaynak: fikircreative.com bülten formu';
+        window.location.href = 'mailto:info@fikircreative.com'
+          + '?subject=' + encodeURIComponent(subj)
+          + '&body=' + encodeURIComponent(body);
+      })(this); return false;">
+  <input type="email" name="email" placeholder="E-posta adresinizi girin"
+         required autocomplete="email">
+  <button type="submit" class="mil-button mil-icon-button-sm mil-arrow-place"
+          aria-label="Gönder"></button>
 </form>
+
 
 
                                 </div>
